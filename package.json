@@ -1,0 +1,31 @@
+{
+  "name": "cleanblog",
+  "version": "1.0.0",
+  "description": "blog ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taltiparmakk/cleanBlog.git"
+  },
+  "keywords": [
+    "blog",
+    "life",
+    "lifestyle"
+  ],
+  "author": "Tayfun Altıparmak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taltiparmakk/cleanBlog/issues"
+  },
+  "homepage": "https://github.com/taltiparmakk/cleanBlog#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

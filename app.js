@@ -10,11 +10,23 @@ const path = require("path");
  app.use(express.static("public"));
 
  
-app.get('/', (req,res)=>{
+app.get('/', (req, res)=> {
 res.render("index");
-})
+});
+
+app.get('/add_post', (req, res)=> {
+res.render("add_post");
+ });
+
+app.get('/about', (req, res)=> {
+res.render("about");
+});
+
+ app.get('/post', (req, res)=> {
+ res.render("post");
+ });
 
 const port = 3000;
-app.listen(port, ()=>{
+app.listen(port, ()=> {
     console.log(`basarıyla ${port}'a baglanildi`)
 });

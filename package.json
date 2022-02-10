@@ -1,32 +1,21 @@
 {
-  "name": "cleanblog",
+  "name": "clean-blog",
   "version": "1.0.0",
-  "description": "blog ",
+  "description": "",
   "main": "app.js",
+  "type": "module",
   "scripts": {
-    "start": "start nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/taltiparmakk/cleanBlog.git"
-  },
-  "keywords": [
-    "blog",
-    "life",
-    "lifestyle"
-  ],
+  "keywords": [],
   "author": "Tayfun Altıparmak",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/taltiparmakk/cleanBlog/issues"
-  },
-  "homepage": "https://github.com/taltiparmakk/cleanBlog#readme",
   "dependencies": {
     "ejs": "^3.1.6",
     "express": "^4.17.2",
-    "mongodb": "^4.3.1",
-    "mongoose": "^6.2.1"
+    "method-override": "^3.0.0",
+    "mongoose": "^6.1.8"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

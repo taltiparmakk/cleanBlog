@@ -1,61 +1,46 @@
-// cleanblog-test-db adında bir veri tabanı için mongoose ile gerekli bağlantı bilgilerini yazalım.
-// "Add New Post" sayfamızdan göndericeğimiz veriler req.body ile yakalayalım, gerekli middleware fonksiyonarını kullanalım.
-// title:String, detail:String, dateCreated:Date(default now) özelliklerine sahip Post modelini oluşturalım.
-// Veri tabanımızda 3 adet pos dökümanı oluşturalım.
-// Oluşturduğumuz post dökümanlarını Blog sitemizin anasayfasında gösterelim.
+import express from "express";
+import mongoose from 'mongoose'
+import methodOverride from 'method-override'
+import { createPost, deletePost, updatePost } from "./controllers/PostController.js";
+import { getAboutPage, getAddPage, getIndexPage, getPostPage , getEditPage } from "./controllers/PageController.js";
 
 
-
-const express = require('express');
-const mongoose = require("mongoose");
 const app = express();
-const ejs= require('ejs');
-const path = require("path");
-const Blog = require("./controller/BlogController");
+
+//MONGODB CONNECT
+mongoose.connect('mongodb://localhost:27017/cleanblog-test-db' , (err) => {
+  if(err) console.log(err)
+
+  console.log('MongoDB Connected')
+})
 
 
- // TEMPLATES ENGINE
- app.set('view engine', 'ejs');
+//TEMPLATE ENGINE
 
- //MIDDLEWARES
- app.use(express.static("public"));
-//gönderilen verileri encoding ediyor
- app.use(express.urlencoded({ extended: true })); 
- app.use(express.json())
- 
+app.set('view engine','ejs')
 
- //connect DB
-mongoose.connect("mongodb://localhost/cleanblog",{
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+//MIDDLEWARES
 
-//Anasayfaya postları göndermek için
-app.get('/', async (req, res) => {
-    const blogs = await Blog.find({})
-    res.render('index', {
-    blogs
-        });
-    });
+app.use(express.static('public'))
+app.use(express.urlencoded({extended:true}));
+app.use(express.json())
+app.use(methodOverride('_method' , {
+  methods:['POST','GET']
+}))
 
-app.get('/add_post', (req, res)=> {
-res.render("add_post");
- });
+//ROUTES
+app.get("/", getIndexPage);
+app.get("/post/:id", getPostPage);
+app.get("/add_post", getAddPage);
+app.get("/about", getAboutPage);
+app.get("/post/edit/:id" , getEditPage)
+app.post('/posts',createPost)
+app.put('/posts/:id', updatePost)
+app.delete('/posts/:id', deletePost)
 
-app.get('/about', (req, res)=> {
-res.render("about");
-});
 
-        
-    //bodyden gelen requestler
-app.post('/blogs', async (req, res) => {
-    await Blog.create(req.body) 
-    res.redirect("/");
-  });
 
-  
 
-const port = 3000;
-app.listen(port, ()=> {
-    console.log(`basarıyla ${port}'a baglanildi`)
+app.listen(3000, () => {
+  console.log("Server running on 3000 port");
 });
